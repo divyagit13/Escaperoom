@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Escape Room</title>
+    </head>
+    <body>
+       <div id="room">
+            <img  id="door" src="images/door.png" onclick="tryDoor()">
+            <img id="combolock" src="images/combolock.png" onclick="tryComboLock()">
+            <img id="keylock" src="images/keylock.png" onclick="tryKeyLock()">
+            <img id="bluekey" src="images/bluekey.png" onclick="pickUpBlueKey()">
+            <img id="pillow" src="images/pillow.png" onclick="movePillow()">
+            <img id="bookshelf" src="images/bookshelf.png">
+            <img id="tv" src="images/tv.png">
+            <img id="chair" src="images/chair.png">
+            <img id="clock" src="images/clock.png">
+            <img id="ball" src="images/ball.png">
+            <img id="mirror" src="images/mirror.png">
+            <img id="page" src="images/page.png" onclick="showCode()">
+            <img id="code" src="images/code.png">
+       </div> 
+       <button id="escape" onclick="window.location.replace('victory.html')">Get out of here!</button> 
+       <script>
+        var hasBlueKey=false;
+        var keyLock="locked";
+        var comboLock="locked";
+        var code="hidden";
+            function tryDoor() {
+                console.log("You clicked the door");
+            }
+            function tryKeyLock() {
+                console.log("You clicked the KeyLock");
+                if (hasBlueKey==true){
+                    keyLock="unlocked";
+                    alert("You slide the key into the lock.You feel the pins go up and down,and then you turn the key.The door pops open");
+                    checkTheRoom();
+                }else{
+                    alert("Its still locked");
+                }
+
+                
+            }
+            function tryComboLock() {
+                console.log("You clicked the ComboLock");
+                var comboTry=prompt("You take the lock in your hand and you enter the code....");
+                if(comboTry=="This project is awesome"){
+                    comboLock="unlocked";
+                    alert("You pull the lock and it opens!You toss the lock on the floor.");
+                    checkTheRoom();
+                } else{
+                    alert("You pull on the lock but its still locked");
+                }
+                
+            }
+            function pickUpBlueKey(){
+                console.log("You picked the key");
+                hasBlueKey=true;
+                alert("You picked the key and the door opens.Could it be that easy?...");
+                document.getElementById("bluekey").style.display="none";
+            }
+            function checkTheRoom(){
+                if(keyLock=="unlocked"){
+                    if(comboLock=="unlocked"){
+                        document.getElementById("escape").style.visibility="visible";
+                    }
+                    else{
+                        alert("You pushed on the door,but the combo lock is still locked.")
+                    }
+                } else{
+                    alert("You try to turn the door knob-still locked");
+                }
+            }
+            function movePillow(){
+                console.log("You clicked the pillow");
+                document.getElementById("pillow").style.top="650px";
+            }
+            function showCode(){
+                console.log("You clicked on the page");
+                code="visible";
+                if(code=="visible"){
+                    document.getElementById("page").style.visibility="hidden";
+                    document.getElementById("code").style.visibility="visible";
+                }
+            }
+       </script>
+    </body>
+</html>
